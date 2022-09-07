@@ -7,11 +7,6 @@ from django.contrib.auth import authenticate, login
 from .forms import LoginForm
 
 
-# class taskUpdate(UpdateView):
-#     model = Task
-#     template_name = 'main/index.html'
-#     fields = ['title', 'task']
-
 
 def user_login(request):
     if request.method == 'POST':
@@ -43,15 +38,6 @@ def index(request):
     else:
         tasks = Task.objects.all()
         return render(request, 'main/index.html', {'title':'Главная страница', 'tasks':tasks})
-
-    #if request.user.is_authenticated:
-    #tasks = Task.objects.all()
-    #return render(request, 'main/index.html', {'title':'Главная страница', 'tasks':tasks})
-    #else:
-        #return render(request, 'main/index.html', {'title':'Не авторизаван!', 'tasks':''})
-        #return redirect('%s?login%s' % (settings.LOGIN_URL, request.path))
-
-    
 
 
 def getData(request):
