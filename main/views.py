@@ -68,7 +68,7 @@ def sortTable(request):
     action = request.POST.get('action')
     if action == 'title':
         task = Task.objects.order_by('title')
-    if action == 'task':
+    elif action == 'task':
         task = Task.objects.order_by('task')
     return render(request, 'main/tasktable.html', {'title':'Главная страница', 'tasks':task})
 
