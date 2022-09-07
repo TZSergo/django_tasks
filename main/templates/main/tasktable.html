@@ -1,0 +1,105 @@
+<div class="card has-table">
+    <header class="card-header">
+        <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
+        Список задач
+        </p>
+        <a href="#" class="card-header-icon">
+        <span class="icon"><i class="mdi mdi-reload"></i></span>
+        </a>
+    </header>
+    <div class="card-content">
+        <table id="taskTable">
+        <thead style="cursor: pointer;">
+        <tr>
+            <th class="image-cell" ></th>
+            <th onclick="sortTable('title')">Название</th>
+            <th onclick="sortTable('task')">Описание</th>
+            <th></th>
+        </tr>
+        </thead>
+        {% for el in tasks %}
+        <tbody>
+            <tr>
+            <td class="image-cell">
+                <div class="image">
+                    <img src="https://ui-avatars.com/api/?name={{ el.author_fn }}+{{ el.author_ln }}&background=random" alt="John Doe" class="rounded-full">
+                </div>
+            </td>
+            <!-- <td data-label="Автор">{{ el.author_fn }} {{ el.author_ln }}</td> -->
+            <td data-label="Название"><a href="{% url 'task_detale' el.id %}">{{ el.title }}</a></td>
+            <td data-label="Описание">{{ el.task }}</td>
+            <td class="actions-cell">
+            <div class="buttons right nowrap">
+            <p class="btn_ed_or_cr" act="update" task_id="{{ el.id }}" task_title="{{ el.title }}" task_task="{{ el.task }}">
+                <button class="button small green &#45;&#45;jb-modal" data-target="sample-modal-2" type="button">
+                    <span class="icon"><i class="mdi mdi-pencil"></i></span>
+                </button>
+            </p>
+            <p class="btn_delete" task_id="{{ el.id }}" task_title="{{ el.title }}">
+                <button class="button small red --jb-modal" data-target="sample-modal" type="button">
+                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                </button>
+            </p>
+            </div>
+            </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+        </table>
+    </div>
+</div>
+
+<script>
+
+function sortTable(n) {
+    $.ajax({
+        type:'POST',
+        url:'{% url "sorttable" %}',
+        data:{
+            action: n,
+            csrfmiddlewaretoken: '{{ csrf_token }}'
+        },
+        success:function(response){
+            $(".taskTable").html(response)
+        },
+        error : function(xhr,errmsg,err) {
+        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        console.log('Error!')
+    }
+    });
+}
+
+$(function() {
+    $(".btn_delete").click(
+        function() {
+        var task_title = $(this).attr('task_title');
+        var task_id = $(this).attr('task_id');
+        console.log(task_id)
+        $('.delete_title').text(task_title);
+        $('.btn_ok_delete').attr('delete_id', task_id);
+        // $('.btnsubmitdel').attr('act', act);
+        })
+
+    $(".btn_ed_or_cr").click(
+        function() {
+        var task_title = $(this).attr('task_title');
+        var task_task = $(this).attr('task_task');
+        var task_id = $(this).attr('task_id');
+        var act = $(this).attr('act');
+        if (act == 'update') {
+            $('.model_eoc_title').text('Редактировать запись');
+        } 
+        if (act == 'create') {
+            $('.model_eoc_title').text('Создать запись');
+        }
+        $('#title').val(task_title);
+        $('#task').val(task_task);
+        $('.btn_ok').attr('task_id', task_id);
+        $('.btn_ok').attr('act', act);
+        })
+});
+
+</script>
+
+<script type="text/javascript" src="https://technext.github.io/admin-one/js/main.min.js?v=1628755089081"></script>

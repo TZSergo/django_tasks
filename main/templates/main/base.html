@@ -1,0 +1,70 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://technext.github.io/admin-one/css/main.css?v=1628755089081">
+    <title>{% block title %}{% endblock %}</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{% static 'js/aiSortTable.min.js' %}"></script>
+
+  </head>
+<body>
+<nav id="navbar-main" class="navbar is-fixed-top">
+  <div class="navbar-brand is-right">
+    <a class="navbar-item --jb-navbar-menu-toggle" data-target="navbar-menu">
+      <span class="icon"><i class="mdi mdi-dots-vertical mdi-24px"></i></span>
+    </a>
+  </div>
+  <div class="navbar-menu" id="navbar-menu">
+    <div class="navbar-end">
+      <div class="navbar-item dropdown has-divider has-user-avatar">
+        <a class="navbar-link">
+          <div class="user-avatar">
+            <img src="https://ui-avatars.com/api/?name={{ user.first_name }}+{{ user.last_name }}&background=random" alt="John Doe" class="rounded-full">
+          </div>
+          <div class="is-user-name"><span>{{ user.first_name }} {{ user.last_name }}</span></div>
+          <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
+        </a>
+        <div class="navbar-dropdown">
+          <hr class="navbar-divider">
+          <a class="navbar-item" href="{% url 'logout' %}">
+            <span class="icon"><i class="mdi mdi-logout"></i></span>
+            <span>Выход</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+<aside class="aside is-placed-left is-expanded">
+  <div class="aside-tools">
+    <div>
+      <b class="font-black">ТК</b> Альфа
+    </div>
+  </div>
+  <div class="menu is-menu-main">
+    <p class="menu-label">Раздел 1</p>
+    <ul class="menu-list">
+      <li class="active">
+        <a href="{% url 'home' %}">
+          <span class="icon"><i class="mdi mdi-desktop-mac"></i></span>
+          <span class="menu-item-label">Задачи</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+{% block content %} 
+{% endblock %}
+
+
+<link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://technext.github.io/admin/dist/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+    <style>
+      .login{
+        background: url('https://intranet.tk-alpha.ru/upload/iblock/26d/aspopraoaproaroapro.jpg')
+      }
+      </style> 
+
+  </head>
+  <body class="h-screen font-sans login bg-cover">
+    <div class="container mx-auto h-full flex flex-1 justify-center items-center">
+      <div class="w-full max-w-lg">
+        <div class="leading-loose">
+          
+          <form method="post" class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
+            {% csrf_token %}
+            <p class="text-gray-800 font-medium text-center text-lg font-bold">Авторизация</p>
+            {{ form.as_p }}
+            <div class="mt-4 items-center justify-between">
+              <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded" type="submit">Войти</button>
+            </div>
+          </form>
+    
+        </div>
+      </div>
+    </div>
+    </body>
+</html>
+
+<!-- <h2>Login</h2>
+  
+    <form method="post">
+      {% csrf_token %}
+      <table>
+        {{ form.as_p }}
+        <tr>
+          <td>&nbsp;</td>
+          <td><input type="submit" value="Submit"></td>
+        </tr>                
+      </table>
+    </form> -->
